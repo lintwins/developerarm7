@@ -401,11 +401,6 @@
               <FilePath>.\LCD.c</FilePath>
             </File>
             <File>
-              <FileName>usbcfg.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>.\usbcfg.h</FilePath>
-            </File>
-            <File>
               <FileName>usbhw.c</FileName>
               <FileType>1</FileType>
               <FilePath>.\usbhw.c</FilePath>
