@@ -23,7 +23,9 @@
 #include "uvcuser.h"
 #include "uvcdemo.h"
 #include "LCD.h"
+#include "uart.h"
 
+#include <stdio.h>
 
 /*----------------------------------------------------------------------------
   Main Program
@@ -41,12 +43,19 @@ int main (void) {
   LCD_puts(" -=www.keil.com=- ");
 #endif
 
+  /* init */
+  UART_Init(1,115200);
+  printf("\r\nUSB Video demo");
   USB_Init();                               /* USB Initialization */
   USB_Connect(TRUE);                        /* USB Connect */
 
+  /* Wait host configure */
+  printf("\r\nWait host configure...");
   while (!USB_Configuration) ;              /* wait until USB is configured */
-
-  while (1) {                               /* Loop forever */
+  printf("\r\nUSB configura done.");
+  /* Loop forever */
+  while (1)
+  {
     ;
   } // end while											   
 } // end main ()

@@ -430,6 +430,16 @@
               <FileType>1</FileType>
               <FilePath>.\Src\usbdesc.c</FilePath>
             </File>
+            <File>
+              <FileName>Retarget.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\Src\Retarget.c</FilePath>
+            </File>
+            <File>
+              <FileName>uart.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\Src\uart.c</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>
