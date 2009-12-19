@@ -345,7 +345,7 @@
               <MiscControls></MiscControls>
               <Define></Define>
               <Undefine></Undefine>
-              <IncludePath></IncludePath>
+              <IncludePath>.\Inc;..\..\SDK\inc</IncludePath>
             </VariousControls>
           </Cads>
           <Aads>
@@ -388,7 +388,7 @@
             <File>
               <FileName>LPC2300.s</FileName>
               <FileType>2</FileType>
-              <FilePath>.\LPC2300.s</FilePath>
+              <FilePath>..\..\SDK\src\LPC2300.s</FilePath>
             </File>
           </Files>
         </Group>
@@ -396,39 +396,39 @@
           <GroupName>Source Code</GroupName>
           <Files>
             <File>
-              <FileName>LCD.c</FileName>
+              <FileName>uvcdemo.c</FileName>
               <FileType>1</FileType>
-              <FilePath>.\LCD.c</FilePath>
-            </File>
-            <File>
-              <FileName>usbhw.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>.\usbhw.c</FilePath>
+              <FilePath>.\Src\uvcdemo.c</FilePath>
             </File>
             <File>
               <FileName>usbcore.c</FileName>
               <FileType>1</FileType>
-              <FilePath>.\usbcore.c</FilePath>
+              <FilePath>.\Src\usbcore.c</FilePath>
             </File>
             <File>
-              <FileName>usbdesc.c</FileName>
+              <FileName>LCD.c</FileName>
               <FileType>1</FileType>
-              <FilePath>.\usbdesc.c</FilePath>
+              <FilePath>.\Src\LCD.c</FilePath>
+            </File>
+            <File>
+              <FileName>usbhw.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\Src\usbhw.c</FilePath>
             </File>
             <File>
               <FileName>usbuser.c</FileName>
               <FileType>1</FileType>
-              <FilePath>.\usbuser.c</FilePath>
+              <FilePath>.\Src\usbuser.c</FilePath>
             </File>
             <File>
               <FileName>uvcuser.c</FileName>
               <FileType>1</FileType>
-              <FilePath>.\uvcuser.c</FilePath>
+              <FilePath>.\Src\uvcuser.c</FilePath>
             </File>
             <File>
-              <FileName>uvcdemo.c</FileName>
+              <FileName>usbdesc.c</FileName>
               <FileType>1</FileType>
-              <FilePath>.\uvcdemo.c</FilePath>
+              <FilePath>.\Src\usbdesc.c</FilePath>
             </File>
           </Files>
         </Group>
