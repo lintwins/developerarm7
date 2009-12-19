@@ -33,12 +33,13 @@ int main (void) {
   PINSEL10 = 0;                             /* Disable ETM interface */
   FIO2DIR  = LEDMSK;                        /* LED's defined as Outputs */
 
+#if 0
   LCD_init();                               /* Initialize LCD display module */
   LCD_cur_off();
   LCD_cls();
   LCD_puts("MCB2300 USB UVC");
   LCD_puts(" -=www.keil.com=- ");
-
+#endif
 
   USB_Init();                               /* USB Initialization */
   USB_Connect(TRUE);                        /* USB Connect */
@@ -49,4 +50,3 @@ int main (void) {
     ;
   } // end while											   
 } // end main ()
-
