@@ -62,8 +62,13 @@ int UART_Init(DWORD PortNum,DWORD baudrate)
 *******************************************************************************/
 int sendchar(int ch)
 {
+#if _UART_USED == 0
+	U0THR = ch;
+	while ((U0LSR & 0x40) == 0); /* 等待数据发送完毕 */
+#else
 	U1THR = ch;
 	while ((U1LSR & 0x40) == 0); /* 等待数据发送完毕 */
+#endif
 	return 0;
 }
 
