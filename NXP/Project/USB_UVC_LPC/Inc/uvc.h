@@ -132,59 +132,59 @@
 
 // Camera Terminal Control Selectors
 // (USB_Video_Class_1.1.pdf, A.9.4 Camera Terminal Control Selectors)
-#define CT_CONTROL_UNDEFINED            		   0x00
-#define CT_SCANNING_MODE_CONTROL            	   0x01
-#define CT_AE_MODE_CONTROL                  	   0x02
-#define CT_AE_PRIORITY_CONTROL              	   0x03
+#define CT_CONTROL_UNDEFINED            		       0x00
+#define CT_SCANNING_MODE_CONTROL            	     0x01
+#define CT_AE_MODE_CONTROL                  	     0x02
+#define CT_AE_PRIORITY_CONTROL              	     0x03
 #define CT_EXPOSURE_TIME_ABSOLUTE_CONTROL          0x04
 #define CT_EXPOSURE_TIME_RELATIVE_CONTROL          0x05
-#define CT_FOCUS_ABSOLUTE_CONTROL       	       0x06
-#define CT_FOCUS_RELATIVE_CONTROL       	       0x07
-#define CT_FOCUS_AUTO_CONTROL               	   0x08
-#define CT_IRIS_ABSOLUTE_CONTROL            	   0x09
-#define CT_IRIS_RELATIVE_CONTROL            	   0x0A
-#define CT_ZOOM_ABSOLUTE_CONTROL            	   0x0B
-#define CT_ZOOM_RELATIVE_CONTROL            	   0x0C
-#define CT_PANTILT_ABSOLUTE_CONTROL         	   0x0D
-#define CT_PANTILT_RELATIVE_CONTROL         	   0x0E
-#define CT_ROLL_ABSOLUTE_CONTROL            	   0x0F
-#define CT_ROLL_RELATIVE_CONTROL            	   0x10
-#define CT_PRIVACY_CONTROL                  	   0x11
+#define CT_FOCUS_ABSOLUTE_CONTROL       	         0x06
+#define CT_FOCUS_RELATIVE_CONTROL       	         0x07
+#define CT_FOCUS_AUTO_CONTROL               	     0x08
+#define CT_IRIS_ABSOLUTE_CONTROL            	     0x09
+#define CT_IRIS_RELATIVE_CONTROL            	     0x0A
+#define CT_ZOOM_ABSOLUTE_CONTROL            	     0x0B
+#define CT_ZOOM_RELATIVE_CONTROL            	     0x0C
+#define CT_PANTILT_ABSOLUTE_CONTROL         	     0x0D
+#define CT_PANTILT_RELATIVE_CONTROL         	     0x0E
+#define CT_ROLL_ABSOLUTE_CONTROL            	     0x0F
+#define CT_ROLL_RELATIVE_CONTROL            	     0x10
+#define CT_PRIVACY_CONTROL                  	     0x11
 
 // Processing Unit Control Selectors
 // (USB_Video_Class_1.1.pdf, A.9.5 Processing Unit Control Selectors)
-#define PU_CONTROL_UNDEFINED            	   	   0x00
+#define PU_CONTROL_UNDEFINED            	   	     0x00
 #define PU_BACKLIGHT_COMPENSATION_CONTROL          0x01
-#define PU_BRIGHTNESS_CONTROL               	   0x02
-#define PU_CONTRAST_CONTROL                 	   0x03
-#define PU_GAIN_CONTROL                 	   	   0x04
-#define PU_POWER_LINE_FREQUENCY_CONTROL 	   	   0x05
-#define PU_HUE_CONTROL                  	   	   0x06
-#define PU_SATURATION_CONTROL           	   	   0x07
-#define PU_SHARPNESS_CONTROL            	   	   0x08
-#define PU_GAMMA_CONTROL                	   	   0x09
+#define PU_BRIGHTNESS_CONTROL               	     0x02
+#define PU_CONTRAST_CONTROL                 	     0x03
+#define PU_GAIN_CONTROL                 	   	     0x04
+#define PU_POWER_LINE_FREQUENCY_CONTROL 	   	     0x05
+#define PU_HUE_CONTROL                  	   	     0x06
+#define PU_SATURATION_CONTROL           	   	     0x07
+#define PU_SHARPNESS_CONTROL            	   	     0x08
+#define PU_GAMMA_CONTROL                	   	     0x09
 #define PU_WHITE_BALANCE_TEMPERATURE_CONTROL       0x0A
 #define PU_WHITE_BALANCE_TEMPERATURE_AUTO_CONTROL  0x0B
 #define PU_WHITE_BALANCE_COMPONENT_CONTROL         0x0C
 #define PU_WHITE_BALANCE_COMPONENT_AUTO_CONTROL    0x0D
-#define PU_DIGITAL_MULTIPLIER_CONTROL   	       0x0E
+#define PU_DIGITAL_MULTIPLIER_CONTROL   	         0x0E
 #define PU_DIGITAL_MULTIPLIER_LIMIT_CONTROL        0x0F
-#define PU_HUE_AUTO_CONTROL             	       0x10
+#define PU_HUE_AUTO_CONTROL             	         0x10
 #define PU_ANALOG_VIDEO_STANDARD_CONTROL           0x11
-#define PU_ANALOG_LOCK_STATUS_CONTROL   	       0x12
+#define PU_ANALOG_LOCK_STATUS_CONTROL   	         0x12
 
 // Extension Unit Control Selectors
 // (USB_Video_Class_1.1.pdf, A.9.6 Extension Unit Control Selectors)
-#define XU_CONTROL_UNDEFINED            	   	   0x00
+#define XU_CONTROL_UNDEFINED            	   	     0x00
 
 // VideoStreaming Interface Control Selectors
 // (USB_Video_Class_1.1.pdf, A.9.7 VideoStreaming Interface Control Selectors)
-#define VS_CONTROL_UNDEFINED             	       0x00
-#define VS_PROBE_CONTROL                 	       0x01
+#define VS_CONTROL_UNDEFINED             	         0x00
+#define VS_PROBE_CONTROL                 	         0x01
 #define VS_COMMIT_CONTROL                     	   0x02
-#define VS_STILL_PROBE_CONTROL               	   0x03
+#define VS_STILL_PROBE_CONTROL               	     0x03
 #define VS_STILL_COMMIT_CONTROL                    0x04
-#define VS_STILL_IMAGE_TRIGGER_CONTROL      	   0x05
+#define VS_STILL_IMAGE_TRIGGER_CONTROL      	     0x05
 #define VS_STREAM_ERROR_CODE_CONTROL       	       0x06
 #define VS_GENERATE_KEY_FRAME_CONTROL     	       0x07
 #define VS_UPDATE_FRAME_SEGMENT_CONTROL    	       0x08
@@ -193,7 +193,7 @@
 
 // Defined Bits Containing Capabilities of the Control
 // (USB_Video_Class_1.1.pdf, 4.1.2 Table 4-3 Defined Bits Containing Capabilities of the Control)
-#define SUPPORTS_GET                 	           0x01
+#define SUPPORTS_GET                 	             0x01
 #define SUPPORTS_SET                               0x02
 #define STATE_DISABLED                             0x04
 #define AUTOUPDATE_CONTROL                         0x08
