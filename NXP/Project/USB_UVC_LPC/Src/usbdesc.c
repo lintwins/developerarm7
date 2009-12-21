@@ -268,8 +268,8 @@ const BYTE USB_ConfigDescriptor[] = {
 #else
   0x01,                                      // bmCapabilities        0x01 Still images using capture method 1
 #endif
-  WBVAL(0x00B0),                             // wWidth                 176 width of frame is 176 pixels
-  WBVAL(0x0090),                             // wHeight                144 hight of frame is 144 pixels
+  WBVAL(JPG_WIDTH),                          // wWidth                 176 width of frame is 176 pixels
+  WBVAL(JPG_HEIGHT),                         // wHeight                144 hight of frame is 144 pixels
   DBVAL(0x000DEC00),                         // dwMinBitRate        912384 min bit rate in bits/s
   DBVAL(0x000DEC00),                         // dwMaxBitRate        912384 max bit rate in bits/s
   DBVAL(0x00009480),                         // dwMaxVideoFrameBufferSize   38016 max video/still frame size in bytes

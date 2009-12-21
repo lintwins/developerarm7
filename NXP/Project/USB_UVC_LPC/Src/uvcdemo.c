@@ -44,15 +44,19 @@ int main (void) {
 #endif
 
   /* init */
-  UART_Init(1,115200);
-  printf("\r\nUSB Video demo");
+  UART_Init(_UART_USED,115200);
+  printf("\r\n#######################################");
+  printf("\r\n# USB Video demo");
+  printf("\r\n# NXP,LPC2368,2009-12-21");
+  printf("\r\n#######################################");
   USB_Init();                               /* USB Initialization */
   USB_Connect(TRUE);                        /* USB Connect */
 
   /* Wait host configure */
   printf("\r\nWait host configure...");
   while (!USB_Configuration) ;              /* wait until USB is configured */
-  printf("\r\nUSB configura done.");
+  printf("\r\nUSB configure done.");
+
   /* Loop forever */
   while (1)
   {
