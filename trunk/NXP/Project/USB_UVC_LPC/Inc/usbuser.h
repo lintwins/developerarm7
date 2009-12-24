@@ -67,5 +67,7 @@ extern void USB_Configure_Event (void);
 extern void USB_Interface_Event (void);
 extern void USB_Feature_Event   (void);
 
+extern volatile DWORD TestCnt;
+extern volatile DWORD JPG_Cnt;
 
 #endif  /* __USBUSER_H__ */

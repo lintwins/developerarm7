@@ -24,6 +24,11 @@
 #include "usbuser.h"
 #include "uvcuser.h"
 
+#define _JPG_GLOBAL_
+#include "JGP_Data.h"
+
+volatile DWORD TestCnt;
+volatile DWORD JPG_Cnt;
 
 /*
  *  USB Power Event Callback
@@ -86,9 +91,20 @@ void USB_WakeUp_Event (void) {
  *  USB Start of Frame Event Callback
  *   Called automatically on USB Start of Frame Event
  */
-
+#define EP3_MAX_PACKET 0x1FE
 #if USB_SOF_EVENT
 void USB_SOF_Event (void) {
+  TestCnt++;
+  if((JPG_size - JPG_Cnt) > EP3_MAX_PACKET)
+  {
+    USB_WriteEP(0x83,(BYTE *)(JPG_data + JPG_Cnt),EP3_MAX_PACKET);
+    JPG_Cnt += EP3_MAX_PACKET;
+  }
+  else
+  {
+    USB_WriteEP(0x83,(BYTE *)(JPG_data + JPG_Cnt),JPG_size - JPG_Cnt);
+    JPG_Cnt = 0;
+  }
 }
 #endif
 
