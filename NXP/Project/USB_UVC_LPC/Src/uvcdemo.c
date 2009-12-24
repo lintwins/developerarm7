@@ -24,6 +24,7 @@
 #include "uvcdemo.h"
 #include "LCD.h"
 #include "uart.h"
+#include "usbuser.h"
 
 #include <stdio.h>
 
@@ -44,6 +45,8 @@ int main (void) {
 #endif
 
   /* init */
+  TestCnt = 0;
+  JPG_Cnt = 0;
   UART_Init(_UART_USED,115200);
   printf("\r\n#######################################");
   printf("\r\n# USB Video demo");
@@ -55,11 +58,11 @@ int main (void) {
   /* Wait host configure */
   printf("\r\nWait host configure...");
   while (!USB_Configuration) ;              /* wait until USB is configured */
-  printf("\r\nUSB configure done.");
+  printf("\r\nUSB configure done.\n");
 
   /* Loop forever */
   while (1)
   {
-    ;
+    printf("\rTestCnt = 0x%08x",TestCnt);
   } // end while											   
 } // end main ()
