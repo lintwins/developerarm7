@@ -93,8 +93,8 @@ void USB_WakeUp_Event (void) {
  */
 #define EP3_MAX_PACKET 0x1FE
 #if USB_SOF_EVENT
-void USB_SOF_Event (void) {
-  TestCnt++;
+void USB_SOF_Event (void)
+{
   if((JPG_size - JPG_Cnt) > EP3_MAX_PACKET)
   {
     USB_WriteEP(0x83,(BYTE *)(JPG_data + JPG_Cnt),EP3_MAX_PACKET);
@@ -104,6 +104,7 @@ void USB_SOF_Event (void) {
   {
     USB_WriteEP(0x83,(BYTE *)(JPG_data + JPG_Cnt),JPG_size - JPG_Cnt);
     JPG_Cnt = 0;
+    TestCnt++;
   }
 }
 #endif
