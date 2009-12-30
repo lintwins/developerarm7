@@ -13,6 +13,7 @@
  *      Copyright (c) 2005-2007 Keil Software.
  *---------------------------------------------------------------------------*/
 
+#include <string.h>
 #include "LPC23xx.H"                                  /* LPC23xx definitions */
 
 #include "type.h"
@@ -29,6 +30,8 @@
 
 volatile DWORD TestCnt;
 volatile DWORD JPG_Cnt;
+volatile DWORD Buf_Size;
+BYTE SOF_Event_Buf[EP3_MAX_PACKET];
 
 /*
  *  USB Power Event Callback
@@ -91,21 +94,27 @@ void USB_WakeUp_Event (void) {
  *  USB Start of Frame Event Callback
  *   Called automatically on USB Start of Frame Event
  */
-#define EP3_MAX_PACKET 0x1FE
 #if USB_SOF_EVENT
 void USB_SOF_Event (void)
 {
-  if((JPG_size - JPG_Cnt) > EP3_MAX_PACKET)
+  /* Payload header - SOF_Event_Buf[0~1] */
+  if(JPG_Cnt == 0) /* Start of Frame */
   {
-    USB_WriteEP(0x83,(BYTE *)(JPG_data + JPG_Cnt),EP3_MAX_PACKET);
-    JPG_Cnt += EP3_MAX_PACKET;
+    SOF_Event_Buf[0]  = 0x02;
+    SOF_Event_Buf[1] &= 0x01;
+    SOF_Event_Buf[1] ^= 0x01; /* FID */
+    SOF_Event_Buf[1] |= 0x80; /* EOH */
   }
   else
   {
-    USB_WriteEP(0x83,(BYTE *)(JPG_data + JPG_Cnt),JPG_size - JPG_Cnt);
-    JPG_Cnt = 0;
-    TestCnt++;
+    /* The last packet of jpg */
+    if((JPG_size - JPG_Cnt) <= (EP3_MAX_PACKET - 2))
+      SOF_Event_Buf[1] |= 0x02; /* EOF - End of Frame */
   }
+
+  /* Copy data and send */
+  Write_To_Buf();
+  USB_WriteEP(0x83,(BYTE *)SOF_Event_Buf,Buf_Size);
 }
 #endif
 
@@ -330,3 +339,24 @@ void USB_EndPoint14 (DWORD event) {
 
 void USB_EndPoint15 (DWORD event) {
 }
+
+/*
+ * Write data to buffer
+ */
+void Write_To_Buf(void)
+{
+  if((JPG_size - JPG_Cnt) > (EP3_MAX_PACKET - 2))
+  {
+    memcpy((void *)(SOF_Event_Buf + 2),(const void *)(JPG_data + JPG_Cnt),EP3_MAX_PACKET - 2);
+    JPG_Cnt += (EP3_MAX_PACKET - 2);
+    Buf_Size = EP3_MAX_PACKET;
+  }
+  else
+  {
+    memcpy((void *)(SOF_Event_Buf + 2),(const void *)(JPG_data + JPG_Cnt),JPG_size - JPG_Cnt);
+    JPG_Cnt = 0;
+    Buf_Size = JPG_size - JPG_Cnt + 2;
+    TestCnt++;
+  }
+}
+
