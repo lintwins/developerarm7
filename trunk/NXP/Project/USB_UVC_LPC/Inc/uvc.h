@@ -28,7 +28,7 @@
 
 // UVC class, subclass codes
 // (USB_Video_Class_1.1.pdf, 3.2 Device Descriptor)
-#define UVC_DEVICE_CLASS_MISCELLANEOUS             0xFE     // kommt evtl. wieder raus
+#define UVC_DEVICE_CLASS_MISCELLANEOUS             0xEF     // kommt evtl. wieder raus
 #define UVC_DEVICE_SUBCLASS                        0x02     // kommt evtl. wieder raus
 #define UVC_DEVICE_PROTOCOL                        0x01     // kommt evtl. wieder raus
 
