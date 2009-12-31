@@ -48,6 +48,7 @@ int main (void) {
   TestCnt = 0;
   JPG_Cnt = 0;
   PTS_Value = 0;
+  PicsToggle = 0;
   UART_Init(_UART_USED,115200);
   printf("\r\n#######################################");
   printf("\r\n# USB Video demo");
