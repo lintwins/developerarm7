@@ -31,6 +31,8 @@
 volatile DWORD TestCnt;
 volatile DWORD JPG_Cnt;
 volatile DWORD Buf_Size;
+volatile DWORD PTS_Value;
+volatile DWORD SCR_Value;
 BYTE SOF_Event_Buf[EP3_MAX_PACKET];
 
 /*
@@ -100,10 +102,11 @@ void USB_SOF_Event (void)
   /* Payload header - SOF_Event_Buf[0~1] */
   if(JPG_Cnt == 0) /* Start of Frame */
   {
-    SOF_Event_Buf[0]  = 0x02;
-    SOF_Event_Buf[1] &= 0x01;
+    SOF_Event_Buf[0]  = 0x0C; /* Header Length */
+    SOF_Event_Buf[1] &= 0x01; /* FID */
     SOF_Event_Buf[1] ^= 0x01; /* FID */
-    SOF_Event_Buf[1] |= 0x80; /* EOH */
+    SOF_Event_Buf[10] = 0x00; /* Reserved */
+    SOF_Event_Buf[11] = 0x00; /* Reserved */
   }
   else
   {
@@ -111,6 +114,20 @@ void USB_SOF_Event (void)
     if((JPG_size - JPG_Cnt) <= (EP3_MAX_PACKET - 2))
       SOF_Event_Buf[1] |= 0x02; /* EOF - End of Frame */
   }
+
+  /* PTS - Presentation Time stamp */
+  PTS_Value        += 0xBB84;
+  SOF_Event_Buf[2]  = (BYTE)(PTS_Value);
+  SOF_Event_Buf[3]  = (BYTE)(PTS_Value >> 8);
+  SOF_Event_Buf[4]  = (BYTE)(PTS_Value >> 16);
+  SOF_Event_Buf[5]  = (BYTE)(PTS_Value >> 24);
+
+  /* SCR - Source Clock Reference */
+  SCR_Value         = PTS_Value + 0x20;
+  SOF_Event_Buf[6]  = (BYTE)(SCR_Value);
+  SOF_Event_Buf[7]  = (BYTE)(SCR_Value >> 8);
+  SOF_Event_Buf[8]  = (BYTE)(SCR_Value >> 16);
+  SOF_Event_Buf[9]  = (BYTE)(SCR_Value >> 24);
 
   /* Copy data and send */
   Write_To_Buf();
@@ -345,17 +362,17 @@ void USB_EndPoint15 (DWORD event) {
  */
 void Write_To_Buf(void)
 {
-  if((JPG_size - JPG_Cnt) > (EP3_MAX_PACKET - 2))
+  if((JPG_size - JPG_Cnt) > (EP3_MAX_PACKET - PAYLOAD_HEADER_SIZE))
   {
-    memcpy((void *)(SOF_Event_Buf + 2),(const void *)(JPG_data + JPG_Cnt),EP3_MAX_PACKET - 2);
-    JPG_Cnt += (EP3_MAX_PACKET - 2);
+    memcpy((void *)(SOF_Event_Buf + PAYLOAD_HEADER_SIZE),(const void *)(JPG_data + JPG_Cnt),EP3_MAX_PACKET - PAYLOAD_HEADER_SIZE);
+    JPG_Cnt += (EP3_MAX_PACKET - PAYLOAD_HEADER_SIZE);
     Buf_Size = EP3_MAX_PACKET;
   }
   else
   {
-    memcpy((void *)(SOF_Event_Buf + 2),(const void *)(JPG_data + JPG_Cnt),JPG_size - JPG_Cnt);
+    memcpy((void *)(SOF_Event_Buf + PAYLOAD_HEADER_SIZE),(const void *)(JPG_data + JPG_Cnt),JPG_size - JPG_Cnt);
     JPG_Cnt = 0;
-    Buf_Size = JPG_size - JPG_Cnt + 2;
+    Buf_Size = JPG_size - JPG_Cnt + PAYLOAD_HEADER_SIZE;
     TestCnt++;
   }
 }
