@@ -41,7 +41,8 @@ extern void USB_Error_Event     (DWORD error);
 #define USB_EVT_OUT_DMA_ERR 12  /* DMA OUT EP - Error */
 #define USB_EVT_IN_DMA_ERR  13  /* DMA  IN EP - Error */
 
-#define EP3_MAX_PACKET 0x1FE
+#define EP3_MAX_PACKET      0x1FE
+#define PAYLOAD_HEADER_SIZE 0x0C
 
 /* USB Endpoint Events Callback Pointers */
 extern void (* const USB_P_EP[16])(DWORD event);
@@ -74,6 +75,8 @@ extern void Write_To_Buf(void);
 extern volatile DWORD TestCnt;
 extern volatile DWORD JPG_Cnt;
 extern volatile DWORD Buf_Size;
+extern volatile DWORD PTS_Value;
+extern volatile DWORD SCR_Value;
 extern          BYTE SOF_Event_Buf[EP3_MAX_PACKET];
 
 #endif  /* __USBUSER_H__ */
