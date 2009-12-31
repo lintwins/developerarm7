@@ -77,6 +77,9 @@ extern volatile DWORD JPG_Cnt;
 extern volatile DWORD Buf_Size;
 extern volatile DWORD PTS_Value;
 extern volatile DWORD SCR_Value;
+extern volatile DWORD JPG_size;
+extern const unsigned char *JPG_data;
+extern volatile BYTE  PicsToggle;
 extern          BYTE SOF_Event_Buf[EP3_MAX_PACKET];
 
 #endif  /* __USBUSER_H__ */

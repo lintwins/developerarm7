@@ -25,14 +25,20 @@
 #include "usbuser.h"
 #include "uvcuser.h"
 
-#define _JPG_GLOBAL_
-#include "JGP_Data.h"
+#define _JPG1_GLOBAL_
+#include "JGP1_Data.h"
+
+#define _JPG2_GLOBAL_
+#include "JGP2_Data.h"
 
 volatile DWORD TestCnt;
 volatile DWORD JPG_Cnt;
 volatile DWORD Buf_Size;
 volatile DWORD PTS_Value;
 volatile DWORD SCR_Value;
+volatile DWORD JPG_size;
+const unsigned char *JPG_data;
+volatile BYTE  PicsToggle;
 BYTE SOF_Event_Buf[EP3_MAX_PACKET];
 
 /*
@@ -107,6 +113,22 @@ void USB_SOF_Event (void)
     SOF_Event_Buf[1] ^= 0x01; /* FID */
     SOF_Event_Buf[10] = 0x00; /* Reserved */
     SOF_Event_Buf[11] = 0x00; /* Reserved */
+
+    /* Pictrue Toggle */
+    if(PicsToggle == 0)
+    {
+      JPG_size   = JPG1_size;
+      JPG_data   = JPG1_data;
+      PicsToggle = 1;
+      TestCnt    = 0;
+    }
+    else
+    {
+      JPG_size   = JPG2_size;
+      JPG_data   = JPG2_data;
+      PicsToggle = 0;
+      TestCnt    = 1;
+    }
   }
   else
   {
@@ -373,7 +395,6 @@ void Write_To_Buf(void)
     memcpy((void *)(SOF_Event_Buf + PAYLOAD_HEADER_SIZE),(const void *)(JPG_data + JPG_Cnt),JPG_size - JPG_Cnt);
     JPG_Cnt = 0;
     Buf_Size = JPG_size - JPG_Cnt + PAYLOAD_HEADER_SIZE;
-    TestCnt++;
   }
 }
 
