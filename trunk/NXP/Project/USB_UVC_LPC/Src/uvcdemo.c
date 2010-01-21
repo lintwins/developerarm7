@@ -45,6 +45,7 @@ int main (void) {
 #endif
 
   /* init */
+  UVC_Delay = 0;
   TestCnt = 0;
   JPG_Cnt = 0;
   PTS_Value = 0;

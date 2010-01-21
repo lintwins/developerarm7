@@ -72,6 +72,7 @@ extern void USB_Feature_Event   (void);
 
 extern void Write_To_Buf(void);
 
+extern volatile DWORD UVC_Delay;
 extern volatile DWORD TestCnt;
 extern volatile DWORD JPG_Cnt;
 extern volatile DWORD Buf_Size;
