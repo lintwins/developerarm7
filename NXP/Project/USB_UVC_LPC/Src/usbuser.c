@@ -31,6 +31,7 @@
 #define _JPG2_GLOBAL_
 #include "JGP2_Data.h"
 
+volatile DWORD UVC_Delay;
 volatile DWORD TestCnt;
 volatile DWORD JPG_Cnt;
 volatile DWORD Buf_Size;
@@ -105,6 +106,11 @@ void USB_WakeUp_Event (void) {
 #if USB_SOF_EVENT
 void USB_SOF_Event (void)
 {
+  /* Delay,only for test ! */
+  UVC_Delay++;
+  if(UVC_Delay < 0x200)
+    return;
+
   /* Payload header - SOF_Event_Buf[0~1] */
   if(JPG_Cnt == 0) /* Start of Frame */
   {
@@ -134,7 +140,10 @@ void USB_SOF_Event (void)
   {
     /* The last packet of jpg */
     if((JPG_size - JPG_Cnt) <= (EP3_MAX_PACKET - 2))
+    {
       SOF_Event_Buf[1] |= 0x02; /* EOF - End of Frame */
+      UVC_Delay = 0;            /* Clear the delay counter,only for test */
+    }
   }
 
   /* PTS - Presentation Time stamp */
@@ -393,8 +402,8 @@ void Write_To_Buf(void)
   else
   {
     memcpy((void *)(SOF_Event_Buf + PAYLOAD_HEADER_SIZE),(const void *)(JPG_data + JPG_Cnt),JPG_size - JPG_Cnt);
-    JPG_Cnt = 0;
     Buf_Size = JPG_size - JPG_Cnt + PAYLOAD_HEADER_SIZE;
+    JPG_Cnt = 0; /* JPG send over */
   }
 }
 
